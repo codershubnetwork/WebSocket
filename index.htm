@@ -17,11 +17,12 @@
         </div>
 
         <div class="notification is-warning" id="msgs" />
-        
+
     </div>
 
     <script>
         var msgs = document.getElementById("msgs");
+        var wsURI = "wss://echo.websocket.org";
 
         function log(msg) {
             msgs.innerHTML += msg + "<br/><hr>";
@@ -29,8 +30,8 @@
 
         function sendWebSocketMsg() {
             if ("WebSocket" in window) {
-            log("WebSocket is supported by your browser");
-            var ws = new WebSocket ("wss://echo.websocket.org");
+            log("WebSocket is supported by your browser.");
+            var ws = new WebSocket (wsURI);
             
             ws.onopen = function () {
                 var msg = "Hello from Coders Hub Network";
@@ -41,16 +42,16 @@
 
             ws.onmessage = function(evt) {
                 var receivedMsg = evt.data;
-                log("Message received: " + receivedMsg);
+                log("<strong>Message received:</strong> " + receivedMsg);
                 
                 console.log("Message received:", evt.data);
             };
 
             ws.onclose = function() {
-                log("Connection is closed with Echo webSocket Server");
+                log("Connection is closed with Echo webSocket Server.");
             }
             } else {
-            log("webSocket is not supported by your browser");
+            log("WebSocket is not supported by your browser!!!");
         }
 
         }
