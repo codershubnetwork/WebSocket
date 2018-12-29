@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="bulma.css">
+    <title>HTML5 WebSocket - Example</title>
+</head>
+<body>
+    
+    <div class="container">
+        <h2 class="title notification is-success">HTML5 WebSocket - Example</h2>
+        <div class="notification">
+            <button class="button is-danger" onclick="sendWebSocketMsg();">Click Here To Send Message</button>
+        </div>
+
+        <div class="notification is-warning" id="msgs" />
+
+    </div>
+
+    <script>
+        var msgs = document.getElementById("msgs");
+
+        function log(msg) {
+            msgs.innerHTML += msg + "<br/><hr>";
+        }
+
+        function sendWebSocketMsg() {
+            if ("WebSocket" in window) {
+            log("WebSocket is supported by your browser");
+            var ws = new WebSocket ("wss://echo.websocket.org");
+            
+            ws.onopen = function () {
+                var msg = "Hello from Coders Hub Network";
+                log("Connection opened with Echo webSocket Server");
+                ws.send(msg);
+                log("Message sent: " + msg);
+            };
+
+            ws.onmessage = function(evt) {
+                var receivedMsg = evt.data;
+                log("Message received: " + receivedMsg);
+                
+                console.log("Message received:", evt.data);
+
+            };
+
+            ws.onclose = function() {
+                log("Connection is closed with Echo webSocket Server");
+            }
+
+            } else {
+            log("webSocket is not supported by your browser");
+        }
+
+        }
+
+    </script>
+</body>
+</html>
