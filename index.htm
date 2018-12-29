@@ -10,13 +10,14 @@
 <body>
     
     <div class="container">
+
         <h2 class="title notification is-success">HTML5 WebSocket - Example</h2>
         <div class="notification">
             <button class="button is-danger" onclick="sendWebSocketMsg();">Click Here To Send Message</button>
         </div>
 
         <div class="notification is-warning" id="msgs" />
-
+        
     </div>
 
     <script>
@@ -43,13 +44,11 @@
                 log("Message received: " + receivedMsg);
                 
                 console.log("Message received:", evt.data);
-
             };
 
             ws.onclose = function() {
                 log("Connection is closed with Echo webSocket Server");
             }
-
             } else {
             log("webSocket is not supported by your browser");
         }
