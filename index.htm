@@ -12,7 +12,13 @@
     <div class="container">
 
         <h2 class="title notification is-success">HTML5 WebSocket - Example</h2>
+        
         <div class="notification">
+            <div class="field">
+                <div class="control">
+                    <input id="newMsg" class="input" type="text" placeholder="Type your text">
+                </div>
+            </div>
             <button class="button is-danger" onclick="sendWebSocketMsg();">Click Here To Send Message</button>
         </div>
 
@@ -34,7 +40,7 @@
             var ws = new WebSocket (wsURI);
             
             ws.onopen = function () {
-                var msg = "Hello from Coders Hub Network";
+                var msg = document.getElementById("newMsg").value;
                 log("Connection opened with Echo webSocket Server");
                 ws.send(msg);
                 log("Message sent: " + msg);
@@ -42,7 +48,7 @@
 
             ws.onmessage = function(evt) {
                 var receivedMsg = evt.data;
-                log("<strong>Message received:</strong> " + receivedMsg);
+                log("<strong><em>Message received:</em></strong> " + receivedMsg);
                 
                 console.log("Message received:", evt.data);
             };
